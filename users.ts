@@ -4,6 +4,7 @@ export interface User {
   email: string;
   password: string;
   role: string;
+  name: string
 }
 
 export const users: User[] = [
@@ -13,21 +14,24 @@ export const users: User[] = [
     username: "priyteshprasad",
     email: "priytesh.official@gmail.com",
     password: "password",
-    role: "ADMIN"
+    role: "ADMIN",
+    name: "Priytesh"
   },
   {
     id: "2",
-    username: "Admin User",
+    username: "adminuser",
     email: "admin.user@example.com",
     password: "password",
-    role: "ADMIN"
+    role: "ADMIN",
+    name: "Adam Min"
   },
   {
     id: "3",
     username: "studentuser",
     email: "student.user@example.com",
     password: "password",
-    role: "STUDENT"
+    role: "STUDENT",
+    name: "John Doe"
   },
   
 ];

@@ -1,58 +1,15 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Link } from "@remix-run/react";
-import { Form, useActionData, useNavigate } from "@remix-run/react";
-import { useEffect } from "react";
-import { User, addUser, findUserByEmailPassword } from "users";
-import { v4 as uuidv4 } from "uuid";
-
-
-type ActionData = {
-  error?: string;
-  user?: User;
-};
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
+    { title: "Remix Quiz App" },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
 
-export const action = async ({ request }: { request: Request }) => {
-  const formData = await request.formData();
-  const username = formData.get("name") as string;
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
-
-  if (!email || !password) {
-    return Response.json(
-      { error: "Email and password are required." },
-      { status: 400 }
-    );
-  }
-
-  const newUser = {
-    id: uuidv4(),
-    username,
-    email,
-    password,
-    role:"STUDENT"
-  };
-
-  const existingUser = findUserByEmailPassword(email, password);
-
-  const user = existingUser || newUser;
-
-  if (!existingUser) {
-    addUser(user);
-  }
-
-  return Response.json({ user }, { status: 200 });
-};
 
 export default function Index() {
-
-
 
   return (
     <div className="h-screen flex items-center justify-center">

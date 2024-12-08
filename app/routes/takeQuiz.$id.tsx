@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import SingleSelectOptions from "./takeQuizElements/SingleSelectOptions";
 import { ResultModal, submitQuiz } from "./takeQuizElements/ResultModal";
-import { Navigate, useNavigate } from "@remix-run/react";
+import {
+  redirect,
+  useLoaderData,
+  useNavigate,
+} from "@remix-run/react";
+import { User, users } from "users";
 
 const getUIElement = (
   element: any,
@@ -44,7 +49,19 @@ const getUIElement = (
   }
 };
 
+export const loader = async ({ params }: { params: { id: string } }) => {
+  const user = users.find((user) => user.id === params.id);
+  if (!user) {
+    return redirect("/");
+  }
+
+  return new Response(JSON.stringify(user), {
+    headers: { "Content-Type": "application/json" },
+  });
+};
+
 export default function TakeQuiz() {
+  const user = useLoaderData<User>();
   const [quiz, setQuiz] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState<any>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -54,6 +71,15 @@ export default function TakeQuiz() {
 
   const navigate = useNavigate();
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("logged_in_user") || "null");
+
+    if (!user) {
+      console.log("No user found, redirecting...");
+      // redirect("/")
+      window.location.href = "/"; // Redirect to home
+    } else {
+      console.log("User is", user);
+    }
     const data = JSON.parse(localStorage.getItem("remix_quiz") || "[]");
     setQuiz(data);
     setCurrentQuestion(data[0] || null);
@@ -89,9 +115,30 @@ export default function TakeQuiz() {
   }
 
   return (
+    <>
+    <div className="bg-sky-950 p-4 flex justify-between">
+        <h1 className="text-3xl text-white text-center font-semibold">
+          Welcome {user.name}
+        </h1>
+        <div className="flex gap-1">
+          <button
+            className="p-2 mx-1 rounded-md border text-center transition bg-gray-400 hover:bg-gray-600"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+          <button
+            className="p-2 mx-1 rounded-md border text-center transition bg-red-400 hover:bg-red-600"
+            onClick={handleQuizSubmit}
+          >
+            Submit
+          </button>
+        </div>
+      </div>
     <div className="min-h-screen h-full bg-gray-100 p-4">
-      <div style={{ position: "relative" }}>
-        <h1 className="text-3xl font-bold text-center mb-6">Take Quiz</h1>
+      
+      {/* <div style={{ position: "relative" }}>
+        <h1 className="text-3xl font-bold  mb-6">Welcome {user.name}</h1>
         <button
           className="p-2 rounded-md border text-center transition bg-red-400 hover:bg-red-600"
           style={{ position: "absolute", top: "2px", right: "20px" }}
@@ -100,16 +147,19 @@ export default function TakeQuiz() {
           Submit
         </button>
         <button
-        className="p-2 rounded-md border text-center transition bg-gray-400 hover:bg-gray-600"
-        style={{ position: "absolute", top: "2px", right: "100px" }}
-        onClick={handleLogout}
+          className="p-2 rounded-md border text-center transition bg-gray-400 hover:bg-gray-600"
+          style={{ position: "absolute", top: "2px", right: "100px" }}
+          onClick={handleLogout}
+        >
+          Logout
+        </button>
+      </div> */}
+      <div
+        style={{ minHeight: "600px", height: "80vh" }}
+        className="h-4/5 grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-6"
       >
-        Logout
-      </button>
-      </div>
-      <div style={{minHeight: "600px"}} className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-6">
         {/* Current Question Board */}
-        <div className="lg:col-span-3 md:col-span-3 p-4 bg-white shadow-md rounded-md border border-gray-200">
+        <div className="overflow-scroll lg:col-span-3 md:col-span-3 p-4 bg-white shadow-md rounded-md border border-gray-200">
           {currentQuestion?.board.map((element: any, index: any) => (
             <div key={index} className="mb-6">
               {getUIElement(element, answers, setAnswers, currentIndex)}
@@ -118,7 +168,7 @@ export default function TakeQuiz() {
         </div>
 
         {/* Question Navigator */}
-        <div className="p-4 bg-white shadow-md rounded-md border border-gray-200">
+        <div className="overflow-scroll p-4 bg-white shadow-md rounded-md border border-gray-200">
           <h2 className="text-xl font-semibold mb-4">Question Navigator</h2>
           <div className="flex md:flex md:flex-col md:overflow-y-auto md:max-h-60 sm:flex sm:flex-row sm:overflow-x-auto sm:whitespace-nowrap gap-2">
             {quiz.map((_, index) => (
@@ -137,15 +187,21 @@ export default function TakeQuiz() {
           </div>
         </div>
       </div>
-      
-
-      {/* Debugging: Answers Array */}
       <div className="mt-6 text-center text-sm text-gray-500">
-        <p>Answers: {JSON.stringify(answers)}</p>
+        <span className="flex gap-1">
+          Your Answers:{" "}
+          {answers &&
+            answers.map((answer: string, index: number) => (
+              <p className="bg-green-200 rounded-full px-2">{`${
+                index + 1
+              }. ${answer}`}</p>
+            ))}
+        </span>
       </div>
 
       {/* Result Modal */}
       <ResultModal report={report} isOpen={isModalOpen} onClose={closeModal} />
     </div>
+    </>
   );
 }

@@ -6,6 +6,7 @@ import Image from "../elements/Image";
 import Description from "../elements/Description";
 import Panel from "../Panel/Panel";
 import { useNavigate } from "@remix-run/react";
+import { User } from "users";
 
 const initialBoardElements = [
   {
@@ -99,7 +100,7 @@ const getElement = (element: any, index: number, props: any) => {
   }
 };
 
-const DragDrop = () => {
+const DragDrop = ({user}: {user: User}) => {
   const [questions, setQuestions] = useState<any>([{ id: 0, board: [] }]);
   const [questionIndex, setQuestionIndex] = useState<number>(0);
   const [boardElements, setBoardElements] = useState<any>([]);
@@ -175,7 +176,7 @@ const DragDrop = () => {
   return (
     <div>
       <div className="bg-sky-950 p-4 grid grid-cols-6">
-        <h1 className="text-3xl text-white text-center font-semibold col-span-5">Welcome Admin!</h1>
+        <h1 className="text-3xl text-white text-center font-semibold col-span-5">Welcome {user.name}</h1>
         <button className="px-4 py-2 font-semibold rounded-lg shadow-md bg-yellow-500 hover:bg-yellow-700 focus:ring-2" onClick={handleLogout}>Logout</button>
       </div>
     

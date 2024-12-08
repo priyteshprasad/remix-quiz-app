@@ -8,6 +8,7 @@ export function ResultModal({ report, isOpen, onClose }: { report: any; isOpen: 
           <div className="text-gray-700">
             <p><strong>Total Questions:</strong> {report.totalQuestions}</p>
             <p><strong>Total Valid Questions:</strong> {report.totalValidQuestions}</p>
+            <p><strong>Total Skipped:</strong> {report.totalSkiped}</p>
             <p><strong>Total Right:</strong> {report.totalRight}</p>
             <p><strong>Total Wrong:</strong> {report.totalWrong}</p>
             <p><strong>Accuracy:</strong> {report.accuracy}%</p>
@@ -28,6 +29,7 @@ export function ResultModal({ report, isOpen, onClose }: { report: any; isOpen: 
     let totalWrong = 0;
     let totalValidQuestions = 0;
     let invalidQuestions = 0;
+    let totalSkiped = 0;
     // console.log("Result", questions, answers)
     // return
     questions.forEach((question, index) => {
@@ -40,7 +42,10 @@ export function ResultModal({ report, isOpen, onClose }: { report: any; isOpen: 
       } else {
         totalValidQuestions++;
         console.log("Answers",userAnswer, correctAnswer)
-        if (userAnswer === correctAnswer) {
+        if(userAnswer === ""){
+          totalSkiped++;
+        }
+        else if (userAnswer === correctAnswer) {
           totalRight++;
         } else {
           totalWrong++;
@@ -57,7 +62,8 @@ export function ResultModal({ report, isOpen, onClose }: { report: any; isOpen: 
       totalRight,
       totalWrong,
       accuracy,
-      invalidQuestions
+      invalidQuestions,
+      totalSkiped
     };
   
     setReport(report);

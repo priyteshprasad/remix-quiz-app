@@ -1,135 +1,70 @@
-# Remix Framework Tutorial: Build and Understand Modern Web Apps
+# Chaabi Remix Quiz App
 
-Welcome to this **Remix Framework Tutorial**! In this project, we’ll build a scalable web application using Remix. You’ll learn about routing, server-side rendering (SSR), API integration, and managing data effectively with modern best practices.
+App is a remix project with admin and student login functionality, CreateQuiz page that the Admin can use to create the quiz. TakeQuiz page that the Student user can use to attempt the quiz the Admin has create. 
 
-## 🚀 What You’ll Learn
+## Important Passwords
 
-- Introduction to Remix and its benefits
-- Setting up a Remix development environment
-- Creating a scalable project structure
-- File-based routing and nested routes in Remix
-- Working with loaders and actions for server-side and client-side data
-- Using Tailwind CSS for responsive design
-- Integrating algorithms and data structure concepts into a real-world app
+- [AdminLoginPage] Username: adminuser Password: password
+- [StudentLoginPage] Username: studentuser Password: password
 
----
 
-## 📹 YouTube Tutorial
+## Flow of Application
 
-🎥 **Watch the full tutorial on YouTube:**  
-[Build a Modern Web App with Remix - Complete Beginner Guide](https://www.youtube.com/@pedrotechnologies)
+### 1. Welcome screen:
+- Welcome screen gives you option to choose the user type as Admin or Student, so choose to login as Admin
 
-In this video, you'll follow step-by-step instructions to:
+### 2. Admin Login page:
+- fill the username and password mentioned above to login, you will be redirected to Create Quiz Page
 
-- Set up a Remix project
-- Create dynamic routes like `/profile/:id`
-- Manage API requests and loaders
-- Style your application with Tailwind CSS
-- Enhance functionality with algorithms and data structures
+### 3. Create Quiz Page
+- for 1st time login it will be blank, with only one canvas,
+- Drag and drop Title or any other element from left panel to the canvas to frame the question
+- Edit the values by clicking on the text
+- One of the option can be set as correct by directly selecting the option. And its text can be eddited as well
+- +Add Question button will add a new question to the right question pannel. Select the question to frame it. 
+- Use delete button to delete any question
+- Once the desired number of questions with Correct Answer are set, save the quiz using Save button.
+- Save button will store the quiz object in the localStorage.
+- If user will reload the page, the quiz will load with the last progress. 
+- after saving Logout and go to Student Login Page
 
-Don't forget to **like**, **subscribe**, and **comment** if you find the tutorial helpful!
+### 4. Student Login Page
+- Use the username and password provided above to login
+- Admin can also use their username and password to login
+- Successfull login will redirect to Take Quiz Page
 
----
+### 5. Take Quiz Page
+- When the page loads, it takes the quiz object from the localStorage and creates the Quiz.
+- User will have to select all the right answers to the best of his knowledge
+- use the question navigator to navigate between questions
+- On clicking the Submit button will generate the report with the total score.
 
-## 📂 Project Structure
+## Extra Features
+- Student can only login into TakeQuiz Page but Admin can log into both
+- Once a user is logged in, it can not move back to any login page untill it logs out
+- Once a user logged out, it can not move back to any of the Take QUiz or Create quiz page
+- Resposive design is made keeping in mind small, medium and large screen size
 
-Here’s the folder structure we use in this project:
+## Scope of improvement for Production
 
-```
-app/
-├── routes/
-│ ├── index.tsx // Home route
-│ ├── about.tsx // Static About page
-│ ├── profile.$id.tsx // Dynamic profile route
-│ └── api/ // API-related routes
-├── components/ // Reusable components
-├── styles/ // Tailwind CSS files
-├── utils/ // Utility functions
-├── root.tsx // Application root layout
-└── entry.client.tsx // Client-side entry point
-```
+- The project need a database integration, currently the databse functionaly is achieved using hardcoded values for user info and browser localStorage for questions
+- Signup Page should be added, but couldn't because databse is not involved
+- Many objects can be give custom types like Question, Element, Title, Options etc. but they are currently given a normaly objects with type as any
+- Syling can be improved to be a lot better, but time required for designing
+- Some elements were not added to the elements Panel, simply because lack of understanding of there functionality and due to lack of time. Eg. Progress Bar, Timer, Multiple Select Options.
+- Validations and checks can be added to user events, for example not allowing blank questions or questions without correctAnsewer to be saved, etc.
+- Elements added to the canvas are fixed for now, but the can also be made draggable to adjust their position or to remove them. But couldn't impliment to avoid complexity that due to lake to time.
+- Marking scheme can be implimented, setting marks for correct answer for each question
+- currently image is saved as a url, but can we stored in cloud storage in the production
 
----
+## Furter Implimentation
+- Similar app structure can be extended or used to create other designing Apps like, picture book or courses. It will require more variety of the elements
+- one good example of such app is Canva desiging app.
 
-## 🛠️ Setting Up the Project
 
-### Prerequisites
-
-Make sure you have the following installed:
-
-- **Node.js** (v16 or later)
-- **npm** or **yarn**
-
-### Installation Steps
-
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/remix-tutorial.git
-   cd remix-tutorial
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-
-4. Open your browser and navigate to `http://localhost:3000`.
-
----
-
-## 📖 Key Concepts Covered
-
-### 1. **Routing in Remix**
-
-Learn how file-based routing works, including dynamic routes like `/profile/:id` and nested layouts for reusable components.
-
-### 2. **Server-Side Data Management**
-
-Understand how to use `loader` functions for fetching data on the server and `action` functions for handling form submissions and mutations.
-
-### 3. **Styling with Tailwind CSS**
-
-Build a responsive and accessible user interface using Tailwind CSS. Add themes and dark mode support seamlessly.
-
-### 4. **Integrating Algorithms and Data Structures**
-
-See how the **Algorithms and Data Structures** course from Brilliant.org enhances your programming skills and helps implement efficient solutions in Remix.
-
----
-
-## ✨ Sponsored by Brilliant.org
-
-This project is proudly sponsored by **Brilliant.org**.  
-Brilliant is an interactive learning platform where you can master algorithms, data structures, programming, and more.
-
-Start your free 30-day trial and get 20% off a premium subscription:  
-[**Try Brilliant Now**](https://brilliant.org/pedrotech)
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! If you’d like to suggest improvements or add features, feel free to:
-
-- Fork the repository
-- Create a new branch
-- Submit a pull request
-
----
-
-## 📜 License
-
-This project is open-source under the [MIT License](LICENSE).
-
----
-
-## 🔗 Additional Resources
+## 🔗 Referenced Resources
 
 - **[Remix Documentation](https://remix.run/docs)**: Official Remix documentation
 - **[Tailwind CSS](https://tailwindcss.com/)**: Styling framework used in this project
-- **[Brilliant.org Algorithms Course](https://brilliant.org)**: Enhance your coding skills
+- **[PedroTech Youtube Channel](https://www.youtube.com/@PedroTechnologies)**: Video Lecture
+
