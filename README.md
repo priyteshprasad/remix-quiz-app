@@ -12,9 +12,11 @@ App is a remix project with admin and student login functionality, CreateQuiz pa
 
 ### 1. Welcome screen:
 - Welcome screen gives you option to choose the user type as Admin or Student, so choose to login as Admin
+<img width="894" alt="Screenshot 2024-12-09 at 12 27 12 AM" src="https://github.com/user-attachments/assets/cead64c3-a8a9-478c-a74b-be839c51f460">
 
 ### 2. Admin Login page:
 - fill the username and password mentioned above to login, you will be redirected to Create Quiz Page
+<img width="895" alt="Screenshot 2024-12-09 at 12 28 06 AM" src="https://github.com/user-attachments/assets/143cc4e7-ce02-4495-b43b-3016cca4174a">
 
 ### 3. Create Quiz Page
 - for 1st time login it will be blank, with only one canvas,
@@ -27,6 +29,7 @@ App is a remix project with admin and student login functionality, CreateQuiz pa
 - Save button will store the quiz object in the localStorage.
 - If user will reload the page, the quiz will load with the last progress. 
 - after saving Logout and go to Student Login Page
+<img width="894" alt="Screenshot 2024-12-09 at 12 28 51 AM" src="https://github.com/user-attachments/assets/b8153fca-f035-45a0-8b29-93b58fab7ed7">
 
 ### 4. Student Login Page
 - Use the username and password provided above to login
@@ -38,6 +41,7 @@ App is a remix project with admin and student login functionality, CreateQuiz pa
 - User will have to select all the right answers to the best of his knowledge
 - use the question navigator to navigate between questions
 - On clicking the Submit button will generate the report with the total score.
+<img width="893" alt="Screenshot 2024-12-09 at 12 30 09 AM" src="https://github.com/user-attachments/assets/9e114c63-7f2c-496d-a13b-5405f9c6ec73">
 
 ## Extra Features
 - Student can only login into TakeQuiz Page but Admin can log into both
