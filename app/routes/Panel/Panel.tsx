@@ -23,11 +23,17 @@ const elements = [
 ];
 function Panel() {
   return (
-    <div style={{ width: "200px", height: "600px", border: "2px solid brown" }}>
-      {elements.map((element, index) => (
-        <DivElement id={element.id} type={element.type} key={index}/>
-      ))}
-    </div>
+    <div className="w-full max-h-screen overflow-y-auto">
+  {elements.map((element, index) => (
+    <DivElement 
+      id={element.id} 
+      type={element.type} 
+      key={index} 
+      className="bg-white shadow-md p-4 mb-4 rounded"
+    />
+  ))}
+</div>
+
   );
 }
 

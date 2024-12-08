@@ -44,7 +44,7 @@ const Profile = () => {
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
       <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
         <h1 className="text-2xl font-bold text-gray-800">
-          Welcome, {user.name}!
+          Welcome, {user.username}!
         </h1>
         <p className="text-gray-600 mt-2">Email: {user.email}</p>
         <div className="mt-6 flex space-x-4">

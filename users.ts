@@ -1,35 +1,35 @@
 export interface User {
   id: string;
-  name: string;
+  username: string;
   email: string;
   password: string;
+  role: string;
 }
 
 export const users: User[] = [
+  
   {
     id: "1",
-    name: "John Doe",
-    email: "john.doe@example.com",
-    password: "password123",
+    username: "priyteshprasad",
+    email: "priytesh.official@gmail.com",
+    password: "password",
+    role: "ADMIN"
   },
   {
     id: "2",
-    name: "Jane Smith",
-    email: "jane.smith@example.com",
-    password: "password456",
+    username: "Admin User",
+    email: "admin.user@example.com",
+    password: "password",
+    role: "ADMIN"
   },
   {
     id: "3",
-    name: "Robert Johnson",
-    email: "robert.johnson@example.com",
-    password: "password789",
+    username: "studentuser",
+    email: "student.user@example.com",
+    password: "password",
+    role: "STUDENT"
   },
-  {
-    id: "4",
-    name: "Emily Davis",
-    email: "emily.davis@example.com",
-    password: "password321",
-  },
+  
 ];
 
 export const addUser = (user: User) => {
